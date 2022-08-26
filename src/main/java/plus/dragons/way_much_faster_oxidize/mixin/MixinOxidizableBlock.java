@@ -8,12 +8,13 @@ import net.minecraft.server.world.ServerWorld;
 import net.minecraft.tag.FluidTags;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
-import net.minecraft.util.math.random.Random;
 import net.minecraft.world.BlockView;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
+
+import java.util.Random;
 
 @Mixin(OxidizableBlock.class)
 public abstract class MixinOxidizableBlock extends Block implements Oxidizable {
@@ -31,7 +32,7 @@ public abstract class MixinOxidizableBlock extends Block implements Oxidizable {
     }
 
     private BlockState tryDegrade(BlockState state){
-        var result = ((Oxidizable) (Object) this).getDegradationResult(state);
+        var result = this.getDegradationResult(state);
         if(result.isEmpty()) return state;
         else return result.get();
     }
