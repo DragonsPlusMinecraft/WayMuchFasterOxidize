@@ -1,4 +1,4 @@
-package plus.dragons.way_much_faster_oxidize.mixin;
+package plus.dragons.wmfo.mixin;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;

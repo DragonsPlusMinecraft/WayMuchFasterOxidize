@@ -17,7 +17,7 @@
   "environment": "*",
   "entrypoints": {
     "main": [
-      "plus.dragons.way_much_faster_oxidize.Faster"
+      "plus.dragons.wmfo.Faster"
     ]
   },
   "mixins": [

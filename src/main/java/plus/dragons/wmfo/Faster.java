@@ -1,4 +1,4 @@
-package plus.dragons.way_much_faster_oxidize;
+package plus.dragons.wmfo;
 
 import net.fabricmc.api.ModInitializer;
 
