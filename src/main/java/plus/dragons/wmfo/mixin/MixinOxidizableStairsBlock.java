@@ -1,9 +1,6 @@
 package plus.dragons.wmfo.mixin;
 
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockState;
-import net.minecraft.block.Oxidizable;
-import net.minecraft.block.OxidizableBlock;
+import net.minecraft.block.*;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.util.math.BlockPos;
 import org.spongepowered.asm.mixin.Mixin;
@@ -14,18 +11,25 @@ import plus.dragons.wmfo.Utils;
 
 import java.util.Random;
 
-@Mixin(OxidizableBlock.class)
-public abstract class MixinOxidizableBlock extends Block implements Oxidizable {
 
-    public MixinOxidizableBlock(Settings settings) {
-        super(settings);
+@Mixin(OxidizableStairsBlock.class)
+public abstract class MixinOxidizableStairsBlock extends StairsBlock implements Oxidizable {
+
+
+    public MixinOxidizableStairsBlock(BlockState baseBlockState, Settings settings) {
+        super(baseBlockState, settings);
     }
 
     @Inject(method = "randomTick", at = @At("HEAD"), cancellable = true)
     public void injected(BlockState state, ServerWorld world, BlockPos pos, Random random, CallbackInfo ci) {
-        if(Utils.hardensOnAnySide(world, pos)){
+        if(Utils.hardensOnAnySide(world, pos) || isWaterLogged(state)){
             world.setBlockState(pos,Utils.tryDegrade(this,state));
             ci.cancel();
         }
     }
+
+    private static boolean isWaterLogged(BlockState blockState){
+        return blockState.get(WATERLOGGED);
+    }
+
 }
